@@ -10,4 +10,4 @@ unsurprisingly, can seldom get things done. In fact, I do write [words]
 sometimes, too. And, needless to say, the same considerations apply.
 
 [code]: https://github.com/giucal
-[words]: /post
+[words]: /posts
