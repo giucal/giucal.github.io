@@ -22,6 +22,7 @@ BASE_URL ?= "$(HOST):$(PORT)"
 MARKDOWN_INDICES = $(shell find -L $(FROM) -type f -name 'index.md')
 MARKDOWN_READMES = $(shell find -L $(FROM) -type f -iname 'README.md')
 MARKDOWN_REGULAR = $(shell find -L $(FROM) -type f -name '*.md' \
+                                                   -not -name  '404.md' \
                                                    -not -name 'index.md' \
                                                    -not -iname 'README.md')
 
@@ -39,6 +40,7 @@ VERBATIM += $(patsubst $(WITH)/%,$(TO)/%,$(SITE_ASSETS))
 PAGES  = $(patsubst $(FROM)/%.md,$(TO)/%.html,$(MARKDOWN_INDICES))
 PAGES += $(patsubst $(FROM)/%/README.md,$(TO)/%/index.html,$(MARKDOWN_READMES))
 PAGES += $(patsubst $(FROM)/%.md,$(TO)/%/index.html,$(MARKDOWN_REGULAR))
+PAGES += $(TO)/404.html
 
 # Recipes
 
@@ -130,7 +132,7 @@ $(TO)/%/index.html: $(FROM)/%.md $(MARKDOWN_DEPS)
 	@ mkdir -p $(@D)
 	bin/markdown $< $@
 
-# Render a Markdown leaf (index.md).
+# Render a Markdown leaf (e.g. index.md).
 $(TO)/%.html: $(FROM)/%.md $(MARKDOWN_DEPS)
 	@ mkdir -p $(@D)
 	bin/markdown $< $@
