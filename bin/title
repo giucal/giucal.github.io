@@ -1,0 +1,6 @@
+#!/bin/sh
+
+# Take the output of markdown-title and strip markup off it
+# while applying typographical substitutions.
+
+bin/markdown-title "$@" | pandoc --to plain
